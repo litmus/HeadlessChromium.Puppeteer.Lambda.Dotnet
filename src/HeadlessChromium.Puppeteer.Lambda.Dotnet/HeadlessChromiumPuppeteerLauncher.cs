@@ -3,9 +3,9 @@ using PuppeteerSharp;
 using System;
 using System.Threading.Tasks;
 
-namespace HeadlessChromium.Puppeter.Lambda.Dotnet
+namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
 {
-    public class HeadlessChromiumPuppeterLauncher
+    public class HeadlessChromiumPuppeteerLauncher
     {
         public static string[] ChromeArgs = new[] 
         {

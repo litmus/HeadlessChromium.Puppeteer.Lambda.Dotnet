@@ -3,10 +3,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>Litmus</Company>
-    <PackageLicenseUrl>https://github.com/litmus/HeadlessChromium.Puppeter.Lambda.Dotnet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>2019 Litmus</Copyright>
-    <PackageProjectUrl>https://github.com/litmus/HeadlessChromium.Puppeter.Lambda.Dotnet</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/litmus/HeadlessChromium.Puppeter.Lambda.Dotnet</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet</RepositoryUrl>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <Version Condition="'$(VersionSuffix)' != ''">1.0.1.$(VersionSuffix)</Version>

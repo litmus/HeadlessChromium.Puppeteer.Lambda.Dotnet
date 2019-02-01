@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeadlessChromium.Puppeter.Lambda.Dotnet", "HeadlessChromium.Puppeter.Lambda.Dotnet\HeadlessChromium.Puppeter.Lambda.Dotnet.csproj", "{79BE7D60-5629-4E31-8F0F-3A92F9B5471C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeadlessChromium.Puppeteer.Lambda.Dotnet", "HeadlessChromium.Puppeteer.Lambda.Dotnet\HeadlessChromium.Puppeteer.Lambda.Dotnet.csproj", "{79BE7D60-5629-4E31-8F0F-3A92F9B5471C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

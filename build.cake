@@ -5,7 +5,7 @@ var currentNpmTarball = "https://registry.npmjs.org/chrome-aws-lambda/-/chrome-a
 
 var configuration = Argument("configuration", "Release");
 var version = AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Version : "0-dev";
-var releaseBinPath = "./src/HeadlessChromium.Puppeter.Lambda.Dotnet/bin/Release/netcoreapp2.1";
+var releaseBinPath = "./src/HeadlessChromium.Puppeteer.Lambda.Dotnet/bin/Release/netcoreapp2.1";
 var artifactsDirectory = "./artifacts";
 
 var target = Argument("target", "Default");
@@ -24,7 +24,7 @@ Task("Build")
                 OutputDirectory = artifactsDirectory,
                 VersionSuffix = version,
             };
-            DotNetCoreBuild("./src/HeadlessChromium.Puppeter.Lambda.Dotnet.sln", settings);
+            DotNetCoreBuild("./src/HeadlessChromium.Puppeteer.Lambda.Dotnet.sln", settings);
 	});
 
 Task("ExtractChromiumFromNpmPackage")

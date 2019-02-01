@@ -5,7 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 
-namespace HeadlessChromium.Puppeter.Lambda.Dotnet
+namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
 {
     public class ChromiumExtractor
     {
