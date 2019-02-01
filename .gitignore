@@ -1,0 +1,7 @@
+/*.tgz
+/tools
+/chrome-aws-lambda
+/artifacts
+/src/HeadlessChromium.Puppeter.Lambda.Dotnet/obj
+.vs
+bin
