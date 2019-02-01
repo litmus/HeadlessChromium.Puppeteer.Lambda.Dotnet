@@ -2,7 +2,7 @@
 Packages everything you need to run [PuppeteerSharp](https://github.com/kblok/puppeteer-sharp) in AWS Lambda on Chromium into a Nuget Package
 
 [![Build status](https://ci.appveyor.com/api/projects/status/m2tryiprv3o4qqdn?svg=true)](https://ci.appveyor.com/project/brianfeucht/headlesschromium-puppeteer-lambda-dotnet)
-![Nuget status](https://img.shields.io/nuget/v/HeadlessChromium.Puppeter.Lambda.Dotnet.svg?style=flat)
+![Nuget status](https://img.shields.io/nuget/v/HeadlessChromium.Puppeteer.Lambda.Dotnet.svg?style=flat)
 
 # Description
 The chromium binary for this project has been extracted from the NPM project [chrome-aws-lambda](https://github.com/alixaxel/chrome-aws-lambda).  It is automatically extracted to `/tmp/chromium` at runtime.
