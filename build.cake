@@ -8,7 +8,7 @@ var version = AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Version 
 var releaseBinPath = "./src/HeadlessChromium.Puppeter.Lambda.Dotnet/bin/Release/netcoreapp2.1";
 var artifactsDirectory = "./artifacts";
 
-var target = Argument("target", "Build");
+var target = Argument("target", "Default");
 
 Task("Setup")
 	.Does(() => { 
@@ -48,4 +48,8 @@ Task("UploadNugetPackages")
 		}
 	});
 
+Task("Default")
+	.IsDependentOn("Build")
+	.IsDependentOn("UploadNugetPackages");
+	
 RunTarget(target);
