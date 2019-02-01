@@ -55,7 +55,7 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
 
         private readonly ILoggerFactory loggerFactory;
 
-        public HeadlessChromiumPuppeterLauncher(ILoggerFactory loggerFactory)
+        public HeadlessChromiumPuppeteerLauncher(ILoggerFactory loggerFactory)
         {
             this.loggerFactory = loggerFactory;
         }
