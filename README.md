@@ -2,6 +2,7 @@
 Packages everything you need to run [PuppeteerSharp](https://github.com/kblok/puppeteer-sharp) in AWS Lambda on Chromium into a Nuget Package
 
 [![Build status](https://ci.appveyor.com/api/projects/status/m2tryiprv3o4qqdn?svg=true)](https://ci.appveyor.com/project/brianfeucht/headlesschromium-puppeteer-lambda-dotnet)
+[![CodeFactor](https://www.codefactor.io/repository/github/litmus/headlesschromium.puppeteer.lambda.dotnet/badge)](https://www.codefactor.io/github/litmus/headlesschromium.puppeteer.lambda.dotnet)
 [![Nuget status](https://img.shields.io/nuget/v/HeadlessChromium.Puppeteer.Lambda.Dotnet.svg?style=flat)](https://www.nuget.org/packages/HeadlessChromium.Puppeteer.Lambda.Dotnet)
 
 # Description
