@@ -7,7 +7,7 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
 {
     public class HeadlessChromiumPuppeteerLauncher
     {
-        public static string[] ChromeArgs = new[] 
+        public static string[] DefaultChromeArgs = new[] 
         {
             "--disable-accelerated-2d-canvas",
             "--disable-background-timer-throttling",
@@ -60,14 +60,19 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             this.loggerFactory = loggerFactory;
         }
 
-        public async Task<Browser> LaunchAsync()
+        public Task<Browser> LaunchAsync()
+        {
+            return LaunchAsync(DefaultChromeArgs);
+        }
+
+        public async Task<Browser> LaunchAsync(string[] chromeArgs)
         {
             var chromeLocation = new ChromiumExtractor(loggerFactory).ExtractChromium();
 
             var launchOptions = new LaunchOptions()
             {
                 ExecutablePath = chromeLocation,
-                Args = ChromeArgs,
+                Args = chromeArgs,
                 Headless = true
             };
 
