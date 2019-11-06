@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>Litmus</Company>
     <PackageLicenseUrl>https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet/blob/master/LICENSE</PackageLicenseUrl>
