@@ -12,7 +12,7 @@
     <Version Condition="'$(VersionSuffix)' != ''">1.0.1.$(VersionSuffix)</Version>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="..\..\chrome-aws-lambda\package\bin\chromium-*.br">
+    <Content Include="..\..\chrome-aws-lambda\package\bin\chromium.br">
       <Pack>true</Pack>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
