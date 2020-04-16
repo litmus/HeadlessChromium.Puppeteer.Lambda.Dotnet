@@ -34,6 +34,11 @@ Task("ExtractChromiumFromNpmPackage")
 		var currentNpmTarball = GetNpmTarballUrl();
 		DownloadFile(currentNpmTarball, "chrome-aws-lambda.tgz");
 		GZipUncompress("chrome-aws-lambda.tgz", "chrome-aws-lambda");
+
+		if(!FileExists("./chrome-aws-lambda/package/bin/chromium.br"))
+		{
+			throw new Exception("chromium.br did not extract to expected location");
+		}
 	});
 	
 Task("UploadNugetPackages")
