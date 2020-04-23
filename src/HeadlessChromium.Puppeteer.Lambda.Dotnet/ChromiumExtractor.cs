@@ -3,10 +3,7 @@ using Mono.Unix;
 using System;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
 using HeadlessChromium.Puppeteer.Lambda.Dotnet.Tar;
-using Microsoft.AspNetCore.WebUtilities;
 
 namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
 {
@@ -101,7 +98,7 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             if (string.IsNullOrEmpty(fontConfig) || !fontConfig.Contains(FontConfigValue))
             {
                 var newValue = string.IsNullOrEmpty(fontConfig) ? FontConfigValue : $"{fontConfig}:{FontConfigValue}";
-                logger.LogInformation("Setting {FontConfigEnvVariable} to {FontConfigValue}", FontConfigEnvVariable, newValue);
+                logger.LogDebug("Setting {FontConfigEnvVariable} to {FontConfigValue}", FontConfigEnvVariable, newValue);
                 Environment.SetEnvironmentVariable(FontConfigEnvVariable, newValue);
             }
 
@@ -109,7 +106,7 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             if (string.IsNullOrEmpty(ldLibPath) || !ldLibPath.Contains(LdLibValue))
             {
                 var newValue = string.IsNullOrEmpty(ldLibPath) ? LdLibValue : $"{ldLibPath}:{LdLibValue}";
-                logger.LogInformation("Setting {LdLibEnvVariable} to {LdLibValue} ", LdLibEnvVariable, newValue);
+                logger.LogDebug("Setting {LdLibEnvVariable} to {LdLibValue} ", LdLibEnvVariable, newValue);
                 Environment.SetEnvironmentVariable(LdLibEnvVariable, newValue);
             }
         }
