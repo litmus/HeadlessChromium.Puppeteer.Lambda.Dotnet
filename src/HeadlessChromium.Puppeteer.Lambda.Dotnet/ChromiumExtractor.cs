@@ -4,18 +4,28 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text;
+using HeadlessChromium.Puppeteer.Lambda.Dotnet.Tar;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
 {
     public class ChromiumExtractor
     {
+        private static string FontConfigEnvVariable = "FONTCONFIG_PATH";
+        private static string FontConfigValue = "/tmp";
+        private static string LdLibEnvVariable = "LD_LIBRARY_PATH";
+        private static string LdLibValue = "/tmp/lib";
+
         public static string ChromiumPath = "/tmp/chromium";
 
         private static readonly object SyncObject = new object();
         private readonly ILogger<ChromiumExtractor> logger;
+        private readonly ILoggerFactory loggerFactory;
 
         public ChromiumExtractor(ILoggerFactory loggerFactory)
         {
+            this.loggerFactory = loggerFactory;
             logger = loggerFactory.CreateLogger<ChromiumExtractor>();
         }
 
@@ -25,9 +35,20 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
         /// <returns>Path to chromium bin</returns>
         public string ExtractChromium()
         {
+            SetEnvironmentVariables();
+
             if (!Directory.Exists("/tmp"))
             {
                 logger.LogDebug("/tmp doesn't exist.  Is this running on lambda?");
+            }
+
+            if(!Directory.Exists("/tmp/.fonts"))
+            {
+                // A fix for the "Check failed: InitDefaultFont(). Could not find the default font" error
+                Directory.CreateDirectory("/tmp/.fonts");
+                File.WriteAllText(
+                    "/tmp/.fonts/font.conf", 
+                    @"<?xml version=""1.0""?><!DOCTYPE fontconfig SYSTEM ""fonts.dtd""><fontconfig><dir>/opt/usr/share/fonts</dir><dir>/tmp/.fonts</dir></fontconfig>");
             }
 
             // Quick bale if exec exists
@@ -42,14 +63,17 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             {
                 if (!File.Exists(ChromiumPath))
                 {
-                    var compressedFile = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "chromium.br").FirstOrDefault();
+                    ExtractDependencies("aws.tar.br", "/tmp");
+                    ExtractDependencies("swiftshader.tar.br", "/tmp/swiftshader");
+
+                    var compressedFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "chromium.br");
 
                     logger.LogDebug($"Found compressed file {compressedFile}");
 
                     using (var writeFile = File.OpenWrite(ChromiumPath))
                     using (var readFile = File.OpenRead(compressedFile))
                     {
-                         logger.LogDebug($"Extracting chromium to {ChromiumPath}");
+                        logger.LogDebug($"Extracting chromium to {ChromiumPath}");
 
                         using (var bs = new BrotliStream(readFile, CompressionMode.Decompress))
                         {
@@ -58,7 +82,8 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
                         }
 
                         var fileInfo = new UnixFileInfo(ChromiumPath);
-                        fileInfo.FileAccessPermissions = FileAccessPermissions.UserReadWriteExecute | FileAccessPermissions.GroupReadWriteExecute;
+                        fileInfo.FileAccessPermissions = FileAccessPermissions.UserReadWriteExecute |
+                                                         FileAccessPermissions.GroupReadWriteExecute;
                     }
 
                     logger.LogInformation("Extracted chromium to {ChromiumPath}", ChromiumPath);
@@ -66,6 +91,48 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             }
 
             return ChromiumPath;
+        }
+
+        private void SetEnvironmentVariables()
+        {
+            Environment.SetEnvironmentVariable("HOME", "/tmp");
+
+            var fontConfig = Environment.GetEnvironmentVariable(FontConfigEnvVariable);
+            if (string.IsNullOrEmpty(fontConfig) || !fontConfig.Contains(FontConfigValue))
+            {
+                var newValue = string.IsNullOrEmpty(fontConfig) ? FontConfigValue : $"{fontConfig}:{FontConfigValue}";
+                logger.LogInformation("Setting {FontConfigEnvVariable} to {FontConfigValue}", FontConfigEnvVariable, newValue);
+                Environment.SetEnvironmentVariable(FontConfigEnvVariable, newValue);
+            }
+
+            var ldLibPath = Environment.GetEnvironmentVariable(LdLibEnvVariable);
+            if (string.IsNullOrEmpty(ldLibPath) || !ldLibPath.Contains(LdLibValue))
+            {
+                var newValue = string.IsNullOrEmpty(ldLibPath) ? LdLibValue : $"{ldLibPath}:{LdLibValue}";
+                logger.LogInformation("Setting {LdLibEnvVariable} to {LdLibValue} ", LdLibEnvVariable, newValue);
+                Environment.SetEnvironmentVariable(LdLibEnvVariable, newValue);
+            }
+        }
+
+        private void ExtractDependencies(string fileName, string path)
+        {
+            var compressedFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+            logger.LogDebug($"Found compressed file {compressedFile}");
+            using (var stream = new MemoryStream())
+            using (var readFile = File.OpenRead(compressedFile))
+            {
+                using (var bs = new BrotliStream(readFile, CompressionMode.Decompress))
+                {
+                    bs.CopyTo(stream);
+                    bs.Dispose();
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                var tarReader = new TarReader(stream, loggerFactory);
+                tarReader.ReadToEnd(path);
+            }
         }
     }
 }
