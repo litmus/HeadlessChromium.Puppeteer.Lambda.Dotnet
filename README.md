@@ -9,7 +9,7 @@ Packages everything you need to run [PuppeteerSharp](https://github.com/kblok/pu
 The chromium binary for this project has been extracted from the NPM project [chrome-aws-lambda](https://github.com/alixaxel/chrome-aws-lambda).  It is automatically extracted to `/tmp/chromium` at runtime.
 
 # Usage
-Screenshot a URL as a byte[].  This project requires lambda to be configured as `netcoreapp2.1`
+Screenshot a URL as a byte[].  This project requires lambda to be configured as `netcoreapp3.1`
 ```
 var browserLauncher = new HeadlessChromiumPuppeterLauncher(logger);
 
