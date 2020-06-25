@@ -43,15 +43,14 @@ Task("ExtractChromiumFromNpmPackage")
 	
 Task("UploadNugetPackages")
 	.Does(() => {
-		if(!AppVeyor.IsRunningOnAppVeyor)
-		{
-			return;
-		}
-
-		var files = GetFiles(artifactsDirectory + "/*.nupkg");
+		var files = GetFiles(artifactsDirectory + "/*.*nupkg");
 		foreach(var file in files)
 		{
-			AppVeyor.UploadArtifact(file);
+			Information("Found artifact to publish - {0}", file);
+			if(AppVeyor.IsRunningOnAppVeyor)
+			{
+				AppVeyor.UploadArtifact(file);
+			}
 		}
 	});
 
