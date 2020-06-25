@@ -49,7 +49,8 @@ Task("UploadNugetPackages")
 			Information("Found artifact to publish - {0}", file);
 			if(AppVeyor.IsRunningOnAppVeyor)
 			{
-				AppVeyor.UploadArtifact(file);
+				AppVeyor.UploadArtifact(file, 
+					settings => settings.SetArtifactType(AppVeyorUploadArtifactType.NuGetPackage));
 			}
 		}
 	});
