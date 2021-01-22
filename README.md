@@ -23,6 +23,10 @@ using(var page = await browser.NewPageAsync())
 
 For more use cases see the [PuppeteerSharp documentation](http://www.puppeteersharp.com/api/index.html)
 
+# Projects using this libraries
+These projects are using this library and are good examples of how you might consume this nuget package
+- [HtmlToPDF](https://github.com/unnijeevan/HtmlToPDF)
+
 # Building
 To build locally:
 ```
