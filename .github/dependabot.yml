@@ -1,0 +1,48 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  ignore:
+  - dependency-name: Microsoft.Extensions.Logging
+    versions:
+    - "> 2.0.2"
+  - dependency-name: Microsoft.Extensions.Logging
+    versions:
+    - "> 2.0.2, < 3"
+  - dependency-name: PuppeteerSharp
+    versions:
+    - "> 1.14.1, < 2"
+  - dependency-name: PuppeteerSharp
+    versions:
+    - 3.0.0
+  rebase-strategy: disabled
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  ignore:
+  - dependency-name: chrome-aws-lambda
+    versions:
+    - ">= 1.17.a, < 1.18"
+  - dependency-name: chrome-aws-lambda
+    versions:
+    - "> 2.0.0, < 2.1"
+  - dependency-name: chrome-aws-lambda
+    versions:
+    - "> 3.1.0, < 3.2"
+  - dependency-name: chrome-aws-lambda
+    versions:
+    - "> 5.2.0, < 5.3"
+  - dependency-name: chrome-aws-lambda
+    versions:
+    - "> 5.3.0, < 5.4"
+  - dependency-name: chrome-aws-lambda
+    versions:
+    - 7.0.0
+    - 8.0.0
+    - 8.0.1
+  rebase-strategy: disabled
