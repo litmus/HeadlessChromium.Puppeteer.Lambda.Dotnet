@@ -11,7 +11,7 @@ The chromium binary for this project has been extracted from the NPM project [ch
 # Usage
 Screenshot a URL as a byte[].  This project requires lambda to be configured as `netcoreapp3.1`
 ```
-var browserLauncher = new HeadlessChromiumPuppeterLauncher(logger);
+var browserLauncher = new HeadlessChromiumPuppeteerLauncher(logger);
 
 using(var browser = await browserLauncher.LaunchAsync())
 using(var page = await browser.NewPageAsync())
