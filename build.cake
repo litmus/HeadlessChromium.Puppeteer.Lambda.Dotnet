@@ -1,8 +1,9 @@
-#addin nuget:?package=SharpZipLib
-#addin nuget:?package=Cake.Compression
+#addin nuget:?package=SharpZipLib&version=1.3.1
+#addin nuget:?package=Cake.Compression&version=0.2.6
 
 using System.IO;
 using Newtonsoft.Json;
+using ICSharpCode.SharpZipLib.GZip;
 
 var configuration = Argument("configuration", "Release");
 var version = AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Version : "0-dev";
