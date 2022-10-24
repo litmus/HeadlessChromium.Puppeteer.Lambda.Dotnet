@@ -61,12 +61,12 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             this.loggerFactory = loggerFactory;
         }
 
-        public Task<Browser> LaunchAsync()
+        public Task<IBrowser> LaunchAsync()
         {
             return LaunchAsync(DefaultChromeArgs);
         }
 
-        public async Task<Browser> LaunchAsync(string[] chromeArgs)
+        public async Task<IBrowser> LaunchAsync(string[] chromeArgs)
         {
             var chromeLocation = new ChromiumExtractor(loggerFactory).ExtractChromium();
 
