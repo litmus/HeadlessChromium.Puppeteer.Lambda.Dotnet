@@ -64,8 +64,8 @@ string GetNpmTarballUrl()
 {
 	var json = System.IO.File.ReadAllText("package.json");
 	var package = JsonConvert.DeserializeObject<dynamic>(json);
-	var version = package.dependencies["chrome-aws-lambda"];
-	return $"https://registry.npmjs.org/chrome-aws-lambda/-/chrome-aws-lambda-{version}.tgz";
+	var version = package.dependencies["@sparticuz/chromium"];
+	return $"https://registry.npmjs.org/@sparticuz/chromium/-/chromium-{version}.tgz";
 }
 
 RunTarget(target);
