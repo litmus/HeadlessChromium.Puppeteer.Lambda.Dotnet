@@ -61,7 +61,7 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
                 if (!File.Exists(ChromiumPath))
                 {
                     ExtractDependencies("aws.tar.br", "/tmp");
-                    ExtractDependencies("swiftshader.tar.br", "/tmp/swiftshader");
+                    ExtractDependencies("swiftshader.tar.br", "/tmp");
 
                     var compressedFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "chromium.br");
 
