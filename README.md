@@ -6,10 +6,11 @@ Packages everything you need to run [PuppeteerSharp](https://github.com/kblok/pu
 [![Nuget status](https://img.shields.io/nuget/v/HeadlessChromium.Puppeteer.Lambda.Dotnet.svg?style=flat)](https://www.nuget.org/packages/HeadlessChromium.Puppeteer.Lambda.Dotnet)
 
 # Description
-The chromium binary for this project has been extracted from the NPM project [Sparticuz/chromium](https://github.com/Sparticuz/chromium).  It is automatically extracted to `/tmp/chromium` at runtime.
+The chromium binary for this project has been extracted from the NPM project [Sparticuz/chromium](https://github.com/Sparticuz/chromium).  It is automatically extracted to `/tmp/chromium` at runtime.  This project requires the lambda runtime to be configured as `netcoreapp3.1` or `dotnet6`.  For [now](https://github.com/Sparticuz/chrome-aws-lambda/issues/7), the chromium binary only supports `x86_64`
 
 # Usage
-Screenshot a URL as a byte[].  This project requires lambda to be configured as `netcoreapp3.1`
+Screenshot a URL as a byte[].  
+
 ```
 var browserLauncher = new HeadlessChromiumPuppeteerLauncher(logger);
 
