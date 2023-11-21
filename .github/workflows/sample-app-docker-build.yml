@@ -1,0 +1,24 @@
+name: Validate Nuget Package Docker Build
+on: [pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+            dotnet-version: 7.x
+      - run: dotnet tool install -g Amazon.Lambda.Tools
+      - name: Build and package nuget
+        uses: cake-build/cake-action@v1
+        with:
+          cake-version: 1.3.0
+      - name: Build and package lambda
+        working-directory: ./sample/SampleLambda
+        run: dotnet lambda package SampleLambda --profile default --region us-west-1
+      - name: Run docker
+        run: docker run --detach -p 9000:8080 samplelambda:latest
+      - name: Test function
+        run: curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
