@@ -1,5 +1,6 @@
 #addin nuget:?package=SharpZipLib&version=1.3.1
 #addin nuget:?package=Cake.Compression&version=0.2.6
+#addin nuget:?package=Newtonsoft.Json&version=13.0.3
 
 using System.IO;
 using Newtonsoft.Json;
