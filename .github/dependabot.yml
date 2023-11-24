@@ -6,9 +6,19 @@ updates:
     interval: daily
     time: "04:00"
   rebase-strategy: disabled
+  ignore:
+    - dependency-name: "PuppeteerSharp"
 - package-ecosystem: npm
   directory: "/"
   schedule:
     interval: daily
     time: "04:00"
   rebase-strategy: disabled
+- package-ecosystem: nuget
+  directory: "/sample/SampleLambda"
+  schedule:
+    interval: daily
+    time: "04:00"
+  rebase-strategy: disabled
+  allow:
+    - dependency-name: "PuppeteerSharp"
