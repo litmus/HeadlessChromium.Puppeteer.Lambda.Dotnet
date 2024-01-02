@@ -24,7 +24,11 @@
       <Pack>true</Pack>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
-    <Content Include="..\..\chrome-aws-lambda\package\bin\aws.tar.br">
+    <Content Include="..\..\chrome-aws-lambda\package\bin\al2.tar.br">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
+    <Content Include="..\..\chrome-aws-lambda\package\bin\al2023.tar.br">
       <Pack>true</Pack>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>

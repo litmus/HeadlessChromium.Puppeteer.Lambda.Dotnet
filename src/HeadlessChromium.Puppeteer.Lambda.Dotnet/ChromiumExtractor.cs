@@ -20,6 +20,42 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
         private readonly ILogger<ChromiumExtractor> logger;
         private readonly ILoggerFactory loggerFactory;
 
+        private string awsOperatingSystem;
+        public string AwsOperatingSystem
+        {
+            get
+            {
+                if (awsOperatingSystem != null)
+                {
+                    return awsOperatingSystem;
+                }
+
+                var executionEnvironment = Environment.GetEnvironmentVariable("AWS_EXECUTION_ENV");
+
+                if (executionEnvironment == null)
+                {
+                    return null;
+                }
+
+                // At time of writing 6 & 7 are running on al2
+                // https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+                if (executionEnvironment == "dotnet7" ||
+                    executionEnvironment == "dotnet6")
+                {
+                    awsOperatingSystem = "al2";
+                }
+                // Assuming anything else is running al2023
+                else if (executionEnvironment.StartsWith("dotnet"))
+                {
+                    awsOperatingSystem = "al2023";
+                }
+
+                return awsOperatingSystem;
+            }
+
+            set => awsOperatingSystem = value;
+        }
+
         public ChromiumExtractor(ILoggerFactory loggerFactory)
         {
             this.loggerFactory = loggerFactory;
@@ -60,7 +96,15 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             {
                 if (!File.Exists(ChromiumPath))
                 {
-                    ExtractDependencies("aws.tar.br", "/tmp");
+                    if (!string.IsNullOrEmpty(AwsOperatingSystem))
+                    {
+                        ExtractDependencies($"{AwsOperatingSystem}.tar.br", "/tmp");
+                    }
+                    else
+                    {
+                        logger.LogWarning("Operating environment unexpected. Unable to extract correct dependencies.");
+                    }
+
                     ExtractDependencies("swiftshader.tar.br", "/tmp");
 
                     var compressedFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "chromium.br");
