@@ -3,20 +3,22 @@ on: [pull_request]
 
 jobs:
   build:
-
+    strategy:
+      matrix:
+        version: [6, 7, 8]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v3
         with:
-            dotnet-version: 7.x
+            dotnet-version: ${{ matrix.version }}.x
       - run: dotnet tool install -g Amazon.Lambda.Tools
       - name: Build and package nuget
         uses: cake-build/cake-action@v1
         with:
           cake-version: 1.3.0
       - name: Build and package lambda
-        working-directory: ./sample/SampleLambda-dotnet7
+        working-directory: ./sample/SampleLambda-dotnet${{ matrix.version }}
         run: dotnet lambda package SampleLambda --profile default --region us-west-1
       - name: Run docker
         run: docker run --detach -p 9000:8080 samplelambda:latest
