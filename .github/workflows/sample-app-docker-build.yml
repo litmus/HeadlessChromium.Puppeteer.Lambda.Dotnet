@@ -2,7 +2,7 @@ name: Validate Nuget Package Docker Build
 on: [pull_request]
 
 jobs:
-  build:
+  lambda-docker-build-dotnet:
     strategy:
       matrix:
         version: [6, 7, 8]
@@ -21,6 +21,6 @@ jobs:
         working-directory: ./sample/SampleLambda-dotnet${{ matrix.version }}
         run: dotnet lambda package SampleLambda --profile default --region us-west-1
       - name: Run docker
-        run: docker run --detach -p 9000:8080 samplelambda${{ matrix.version }}:latest
+        run: docker run --detach -p 9000:8080 samplelambda-dotnet${{ matrix.version }}:latest
       - name: Test function
         run: curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
