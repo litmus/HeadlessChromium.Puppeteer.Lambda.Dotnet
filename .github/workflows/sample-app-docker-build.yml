@@ -16,7 +16,7 @@ jobs:
         with:
           cake-version: 1.3.0
       - name: Build and package lambda
-        working-directory: ./sample/SampleLambda
+        working-directory: ./sample/SampleLambda-dotnet7
         run: dotnet lambda package SampleLambda --profile default --region us-west-1
       - name: Run docker
         run: docker run --detach -p 9000:8080 samplelambda:latest
