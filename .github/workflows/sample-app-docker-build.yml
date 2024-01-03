@@ -4,6 +4,7 @@ on: [pull_request]
 jobs:
   lambda-docker-build-dotnet:
     strategy:
+      fail-fast: false
       matrix:
         version: [6, 7, 8]
     runs-on: ubuntu-latest
