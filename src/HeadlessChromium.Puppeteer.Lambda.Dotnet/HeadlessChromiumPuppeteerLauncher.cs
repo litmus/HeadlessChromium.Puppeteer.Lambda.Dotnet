@@ -74,7 +74,7 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             {
                 ExecutablePath = chromeLocation,
                 Args = chromeArgs,
-                Headless = true
+                Headless = true,
             };
 
             return await new Launcher(loggerFactory).LaunchAsync(launchOptions);

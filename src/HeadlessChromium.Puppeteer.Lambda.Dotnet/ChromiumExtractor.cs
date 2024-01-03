@@ -31,17 +31,10 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
                     return awsOperatingSystem;
                 }
 
-                var executionEnvironment = Environment.GetEnvironmentVariable("AWS_EXECUTION_ENV");
-
-                if (executionEnvironment == null)
-                {
-                    return null;
-                }
-
                 if(File.Exists("/etc/system-release-cpe"))
                 {
                     var osDetails = File
-                        .ReadAllLines("/etc/system-release-cpe")
+                        .ReadLines("/etc/system-release-cpe")
                         .FirstOrDefault() ?? string.Empty;
 
                     if(osDetails.EndsWith("amazon:amazon_linux:2"))
