@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using HeadlessChromium.Puppeteer.Lambda.Dotnet.Tar;
+using System.Linq;
 
 namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
 {
@@ -37,18 +38,20 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
                     return null;
                 }
 
-                // At time of writing 6 & 7 are running on al2
-                // https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
-                if (executionEnvironment == "dotnet7" ||
-                    executionEnvironment == "dotnet6")
+                if(File.Exists("/etc/system-release-cpe"))
                 {
-                    awsOperatingSystem = "al2";
-                }
-                // Assuming anything else is running al2023
-                else if (executionEnvironment.StartsWith("dotnet") ||
-                         executionEnvironment.StartsWith("AWS_Lambda_dotnet"))
-                {
-                    awsOperatingSystem = "al2023";
+                    var osDetails = File
+                        .ReadAllLines("/etc/system-release-cpe")
+                        .FirstOrDefault() ?? string.Empty;
+
+                    if(osDetails.EndsWith("amazon:amazon_linux:2"))
+                    {
+                        awsOperatingSystem = "al2";
+                    }
+                    else if(osDetails.EndsWith("amazon:amazon_linux:2023"))
+                    {
+                        awsOperatingSystem = "al2023";
+                    }
                 }
 
                 return awsOperatingSystem;
