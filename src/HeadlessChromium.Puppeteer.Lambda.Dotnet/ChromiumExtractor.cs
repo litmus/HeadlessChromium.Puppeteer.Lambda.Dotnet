@@ -45,7 +45,8 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
                     awsOperatingSystem = "al2";
                 }
                 // Assuming anything else is running al2023
-                else if (executionEnvironment.StartsWith("dotnet"))
+                else if (executionEnvironment.StartsWith("dotnet") ||
+                         executionEnvironment.StartsWith("AWS_Lambda_dotnet"))
                 {
                     awsOperatingSystem = "al2023";
                 }
