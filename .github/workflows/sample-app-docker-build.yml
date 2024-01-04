@@ -24,4 +24,14 @@ jobs:
       - name: Run docker
         run: docker run --detach -p 9000:8080 samplelambda-dotnet${{ matrix.version }}:latest
       - name: Test function
-        run: curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}' | grep -q iVB
+        run: |
+          curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}' -o /tmp/lambda_result.txt
+          if $(grep -q iVB /tmp/lambda_result.txt); then
+            echo "SUCCESS: The lambda rendered a PNG"
+            exit 0
+          else
+            echo "FAILURE: The lambda did not return expected png value starting with iVB"
+            cat /tmp/lambda_result.txt
+            exit 1
+          fi
+        shell: bash
