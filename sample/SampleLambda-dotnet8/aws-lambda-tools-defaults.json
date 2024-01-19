@@ -1,0 +1,10 @@
+{
+  "configuration": "Release",
+  "framework": "net8.0",
+  "function-runtime": "dotnet8",
+  "function-memory-size": 1536,
+  "function-timeout": 60,
+  "function-handler": "SampleLambda::SampleLambda.HelloWorldHandler::Handle",
+  "package-type": "image",
+  "docker-host-build-output-dir": "./bin/Release/lambda-publish"
+}
