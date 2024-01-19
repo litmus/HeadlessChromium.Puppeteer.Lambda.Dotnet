@@ -36,7 +36,6 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             "--enable-async-dns",
             "--enable-simple-cache-backend",
             "--enable-tcp-fast-open",
-            "--enable-webgl",
             "--hide-scrollbars",
             "--ignore-gpu-blacklist",
             "--media-cache-size=33554432",
@@ -49,7 +48,8 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             "--no-zygote",
             "--password-store=basic",
             "--prerender-from-omnibox=disabled",
-            "--use-gl=swiftshader",
+            "--use-gl=angle",
+            "--use-angle=swiftshader",
             "--use-mock-keychain",
             "--single-process",
         };
