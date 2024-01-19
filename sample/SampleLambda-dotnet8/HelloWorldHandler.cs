@@ -12,7 +12,12 @@ namespace SampleLambda
             var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
             var browserLauncher = new HeadlessChromiumPuppeteerLauncher(loggerFactory);
 
-            await using (var browser = await browserLauncher.LaunchAsync())
+            var launchArgs = HeadlessChromiumPuppeteerLauncher.DefaultChromeArgs
+                .Append("--enable-logging")
+                .Append("--v=1")
+                .ToArray();
+
+            await using (var browser = await browserLauncher.LaunchAsync(launchArgs))
             await using (var page = await browser.NewPageAsync())
             {
                 await page.GoToAsync("https://www.google.com");
