@@ -1,4 +1,4 @@
-FROM public.ecr.aws/lambda/dotnet:8-preview
+FROM public.ecr.aws/lambda/dotnet:8
 
 # Set the image's internal work directory
 WORKDIR /var/task
