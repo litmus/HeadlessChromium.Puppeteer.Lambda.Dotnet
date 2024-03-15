@@ -146,7 +146,7 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
             var ldLibPath = Environment.GetEnvironmentVariable(LdLibEnvVariable);
             if (string.IsNullOrEmpty(ldLibPath) || !ldLibPath.Contains(LdLibValue))
             {
-                var newValue = string.IsNullOrEmpty(ldLibPath) ? LdLibValue : $"{ldLibPath}:{LdLibValue}";
+                var newValue = string.IsNullOrEmpty(ldLibPath) ? LdLibValue : $"{LdLibValue}:{ldLibPath}";
                 logger.LogDebug("Setting {LdLibEnvVariable} to {LdLibValue} ", LdLibEnvVariable, newValue);
                 Environment.SetEnvironmentVariable(LdLibEnvVariable, newValue);
             }
