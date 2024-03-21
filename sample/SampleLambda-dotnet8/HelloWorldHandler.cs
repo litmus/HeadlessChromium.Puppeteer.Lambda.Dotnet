@@ -1,6 +1,7 @@
 ﻿using Amazon.Lambda.Core;
 using HeadlessChromium.Puppeteer.Lambda.Dotnet;
 using Microsoft.Extensions.Logging;
+using PuppeteerSharp;
 
 namespace SampleLambda
 {
@@ -12,7 +13,26 @@ namespace SampleLambda
             var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
             var browserLauncher = new HeadlessChromiumPuppeteerLauncher(loggerFactory);
 
-            await using (var browser = await browserLauncher.LaunchAsync())
+            var launchArgs = HeadlessChromiumPuppeteerLauncher.DefaultChromeArgs
+                .Append("--enable-logging")
+                .Append("--log-level=0")
+                .Append("--single-process")
+                .ToArray();
+
+
+            var chromeLocation = new ChromiumExtractor(loggerFactory).ExtractChromium();
+
+            var launchOptions = new LaunchOptions()
+            {
+                ExecutablePath = chromeLocation,
+                Args = launchArgs,
+                Headless = true,
+                DumpIO = true,
+                EnqueueTransportMessages = false,
+                UserDataDir = "/tmp/",
+            };
+            
+            await using (var browser = await new Launcher(loggerFactory).LaunchAsync(launchOptions))
             await using (var page = await browser.NewPageAsync())
             {
                 await page.GoToAsync("https://www.google.com");
