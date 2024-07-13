@@ -102,6 +102,7 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
                         logger.LogWarning("Operating environment unexpected. Unable to extract correct dependencies.");
                     }
 
+                    ExtractDependencies("fonts.tar.br", "/tmp");
                     ExtractDependencies("swiftshader.tar.br", "/tmp");
 
                     var compressedFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "chromium.br");
