@@ -32,6 +32,10 @@
       <Pack>true</Pack>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
+    <Content Include="..\..\chrome-aws-lambda\package\bin\fonts.tar.br">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
     <Content Include="..\..\chrome-aws-lambda\package\bin\swiftshader.tar.br">
       <Pack>true</Pack>
       <PackageCopyToOutput>true</PackageCopyToOutput>

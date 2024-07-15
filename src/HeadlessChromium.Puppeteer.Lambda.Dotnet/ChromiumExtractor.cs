@@ -72,15 +72,6 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
                 logger.LogDebug("/tmp doesn't exist.  Is this running on lambda?");
             }
 
-            if(!Directory.Exists("/tmp/.fonts"))
-            {
-                // A fix for the "Check failed: InitDefaultFont(). Could not find the default font" error
-                Directory.CreateDirectory("/tmp/.fonts");
-                File.WriteAllText(
-                    "/tmp/.fonts/font.conf", 
-                    @"<?xml version=""1.0""?><!DOCTYPE fontconfig SYSTEM ""fonts.dtd""><fontconfig><dir>/opt/usr/share/fonts</dir><dir>/tmp/.fonts</dir></fontconfig>");
-            }
-
             // Quick bale if exec exists
             if (File.Exists(ChromiumPath))
             {
@@ -102,6 +93,7 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
                         logger.LogWarning("Operating environment unexpected. Unable to extract correct dependencies.");
                     }
 
+                    ExtractDependencies("fonts.tar.br", "/tmp");
                     ExtractDependencies("swiftshader.tar.br", "/tmp");
 
                     var compressedFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "chromium.br");
