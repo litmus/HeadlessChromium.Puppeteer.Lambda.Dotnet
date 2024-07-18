@@ -20,27 +20,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\..\chrome-aws-lambda\package\bin\chromium.br">
+    <Content Include="..\..\chrome-aws-lambda\package\bin\*.br">
       <Pack>true</Pack>
+      <PackagePath>contentFiles</PackagePath>
       <PackageCopyToOutput>true</PackageCopyToOutput>
-    </Content>
-    <Content Include="..\..\chrome-aws-lambda\package\bin\al2.tar.br">
-      <Pack>true</Pack>
-      <PackageCopyToOutput>true</PackageCopyToOutput>
-    </Content>
-    <Content Include="..\..\chrome-aws-lambda\package\bin\al2023.tar.br">
-      <Pack>true</Pack>
-      <PackageCopyToOutput>true</PackageCopyToOutput>
-    </Content>
-    <Content Include="..\..\chrome-aws-lambda\package\bin\fonts.tar.br">
-      <Pack>true</Pack>
-      <PackageCopyToOutput>true</PackageCopyToOutput>
-    </Content>
-    <Content Include="..\..\chrome-aws-lambda\package\bin\swiftshader.tar.br">
-      <Pack>true</Pack>
-      <PackageCopyToOutput>true</PackageCopyToOutput>
+      <Link>Package\$(FileName).br</Link>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="HeadlessChromium.Puppeteer.Lambda.Dotnet.targets" PackagePath="build/HeadlessChromium.Puppeteer.Lambda.Dotnet.targets" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
