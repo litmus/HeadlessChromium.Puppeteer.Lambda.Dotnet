@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using PuppeteerSharp;
+using PuppeteerAot;
 using System;
 using System.Threading.Tasks;
 
