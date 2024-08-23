@@ -9,10 +9,8 @@ updates:
     interval: daily
     time: "04:00"
   rebase-strategy: disabled
-  allow:
-    - dependency-name: "PuppeteerSharp"
-    - dependency-name: "Amazon.Lambda.Core"
-    - dependency-name: "Amazon.Lambda.Serialization.Json"
+  ignore:
+    - dependency-name: "HeadlessChromium.Puppeteer.Lambda.Dotnet"
 - package-ecosystem: nuget
   directory: "/src/HeadlessChromium.Puppeteer.Lambda.Dotnet"
   schedule:
