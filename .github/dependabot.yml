@@ -19,6 +19,7 @@ updates:
   rebase-strategy: disabled
   ignore:
     - dependency-name: "PuppeteerSharp"
+    - dependency-name: "Microsoft.Extensions.Logging"
 - package-ecosystem: npm
   directory: "/"
   schedule:
