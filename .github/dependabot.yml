@@ -1,7 +1,20 @@
 version: 2
 updates:
 - package-ecosystem: nuget
-  directory: "/"
+  directories:
+    - "/sample/SampleLambda-dotnet6"
+    - "/sample/SampleLambda-dotnet7"
+    - "/sample/SampleLambda-dotnet8"
+  schedule:
+    interval: daily
+    time: "04:00"
+  rebase-strategy: disabled
+  allow:
+    - dependency-name: "PuppeteerSharp"
+    - dependency-name: "Amazon.Lambda.Core"
+    - dependency-name: "Amazon.Lambda.Serialization.Json"
+- package-ecosystem: nuget
+  directory: "/src/HeadlessChromium.Puppeteer.Lambda.Dotnet"
   schedule:
     interval: daily
     time: "04:00"
@@ -14,33 +27,3 @@ updates:
     interval: daily
     time: "04:00"
   rebase-strategy: disabled
-- package-ecosystem: nuget
-  directory: "/sample/SampleLambda-dotnet6"
-  schedule:
-    interval: daily
-    time: "04:00"
-  rebase-strategy: disabled
-  allow:
-    - dependency-name: "PuppeteerSharp"
-    - dependency-name: "Amazon.Lambda.Core"
-    - dependency-name: "Amazon.Lambda.Serialization.Json"
-- package-ecosystem: nuget
-  directory: "/sample/SampleLambda-dotnet7"
-  schedule:
-    interval: daily
-    time: "04:00"
-  rebase-strategy: disabled
-  allow:
-    - dependency-name: "PuppeteerSharp"
-    - dependency-name: "Amazon.Lambda.Core"
-    - dependency-name: "Amazon.Lambda.Serialization.Json"
-- package-ecosystem: nuget
-  directory: "/sample/SampleLambda-dotnet8"
-  schedule:
-    interval: daily
-    time: "04:00"
-  rebase-strategy: disabled
-  allow:
-    - dependency-name: "PuppeteerSharp"
-    - dependency-name: "Amazon.Lambda.Core"
-    - dependency-name: "Amazon.Lambda.Serialization.Json"
