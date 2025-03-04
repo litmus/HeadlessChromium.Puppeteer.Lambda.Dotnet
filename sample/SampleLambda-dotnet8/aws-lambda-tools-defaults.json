@@ -6,5 +6,6 @@
   "function-timeout": 60,
   "function-handler": "SampleLambda::SampleLambda.HelloWorldHandler::Handle",
   "package-type": "image",
-  "docker-host-build-output-dir": "./bin/Release/lambda-publish"
+  "docker-host-build-output-dir": "./bin/Release/lambda-publish",
+  "msbuild-parameters": "--self-contained true"
 }
