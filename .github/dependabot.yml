@@ -26,3 +26,15 @@ updates:
     interval: daily
     time: "04:00"
   rebase-strategy: disabled
+
+
+- package-ecosystem: "github-actions"
+  open-pull-requests-limit: 5
+  directory: "/"
+  schedule:
+    interval: "weekly"
+    day: wednesday
+    time: "00:00"
+    timezone: America/Chicago
+  commit-message:
+    prefix: ci
