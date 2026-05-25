@@ -1,0 +1,7 @@
+image: Visual Studio 2022
+
+build_script:
+  - dotnet restore src\HeadlessChromium.Puppeteer.Lambda.Dotnet.sln
+  - dotnet build src\HeadlessChromium.Puppeteer.Lambda.Dotnet.sln --no-restore -c Release -p:GeneratePackageOnBuild=false
+
+test: off
